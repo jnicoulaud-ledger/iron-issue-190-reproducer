@@ -1,7 +1,6 @@
 import io.github.iltotore.iron.*
-import io.github.iltotore.iron.constraint.all.*
+import io.github.iltotore.iron.constraint.numeric.*
 import sttp.tapir.Codec.PlainCodec
-import sttp.tapir.DecodeResult
 import sttp.tapir.codec.iron.TapirCodecIron
 
 opaque type Version = Int :| GreaterEqual[0]
