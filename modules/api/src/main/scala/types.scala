@@ -7,4 +7,4 @@ import sttp.tapir.codec.iron.TapirCodecIron
 opaque type Version = Int :| GreaterEqual[0]
 
 object Version extends RefinedTypeOps[Int, GreaterEqual[0], Version] with TapirCodecIron:
-  given PlainCodec[Version] = summon[PlainCodec[Int]].mapDecode(s => DecodeResult.fromEitherString(s.toString, either(s)))(_.value)
+  given PlainCodec[Version] = ironTypeCodec
