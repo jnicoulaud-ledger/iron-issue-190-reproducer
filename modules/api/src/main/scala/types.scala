@@ -4,7 +4,7 @@ import sttp.tapir.Codec.PlainCodec
 import sttp.tapir.DecodeResult
 import sttp.tapir.codec.iron.TapirCodecIron
 
-private type VersionConstraints = DescribedAs[GreaterEqual[0], "Version must be positive"]
+type VersionConstraints = GreaterEqual[0]
 opaque type Version = Int :| VersionConstraints
 
 object Version extends RefinedTypeOps[Int, VersionConstraints, Version] with TapirCodecIron:
