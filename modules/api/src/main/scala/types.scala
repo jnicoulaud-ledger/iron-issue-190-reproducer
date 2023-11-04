@@ -1,12 +1,12 @@
-import cats.{Order, Show}
+import cats.Show
 import cats.syntax.all.*
 import io.circe.{Decoder, Encoder, Codec as CirceCodec}
 import io.github.iltotore.iron.*
 import io.github.iltotore.iron.constraint.all.*
 import sttp.tapir
 import sttp.tapir.Codec.PlainCodec as TapirPlainCodec
-import sttp.tapir.{CodecFormat, DecodeResult, Codec as TapirCodec, Schema as TapirSchema}
 import sttp.tapir.codec.iron.TapirCodecIron
+import sttp.tapir.{CodecFormat, DecodeResult, Codec as TapirCodec, Schema as TapirSchema}
 
 given CirceCodec[Int] = CirceCodec.from(Decoder.decodeInt, Encoder.encodeInt)
 
@@ -23,7 +23,3 @@ object Version extends RefinedTypeOps[Int, VersionConstraints, Version], TapirCo
   given TapirPlainCodec[Version] = summon[TapirPlainCodec[Int]].iemap(either(_))(_.value)
 
   given TapirSchema[Version] = ironTypeSchema[Int, VersionConstraints]
-
-  given Order[Version] = Order.fromOrdering
-
-  given Show[Version] = summon[Show[Int]].contramap(_.value)
